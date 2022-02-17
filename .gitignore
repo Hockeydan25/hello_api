@@ -3,4 +3,5 @@ env/
 pyvenv.cfg
 __pycache__
 .vscode
-
+dog.jpg
+kitten.jpg
