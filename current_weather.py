@@ -1,7 +1,7 @@
 """
 Dan Smestad Capstone 2905 class Python API connections
 """
-
+from distutils.log import error
 import requests
 from pprint import pprint  # not needed here in updated version.
 import os
@@ -9,7 +9,7 @@ import os
 key = os.environ.get('WEATHER_KEY')
 #print(key)
 
-url = 'https://api.openweathermap.org/data/2.5/weather?q=minneapolis,mn,us&units=imperial&appid={key}'
+url = 'https://api.openweathermap.org/data/2.5/weather' #?q=minneapolis,mn,us&units=imperial&appid={key}'
 #We can adjust city, state, temp units. understand the url to make requests read url's documnet about the api.
 
 # users can request a change of city and location
@@ -20,13 +20,13 @@ def main():
     location = get_location()
     weather_data = get_current_weather(location, key)
     current_temp = get_temp(weather_data)
-    print(f'{location}\'s current temperature is:{current_temp}f')
+    print('current{current_temp}f')
 
 def get_location():
     city, country = '',''  # empty string variables for storing the users choice.  
     while len(city)== 0:  # can't have empty data to request from api checking 
         city = input('Please enter the city you would like: ')
-        
+        print(city)
     while len(country)== 0:  # can't have empty data to request from api checking 
         country = input('Please enter the 2-letter (USA country = us) contry you would like: ').strip()
 
