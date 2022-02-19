@@ -20,9 +20,9 @@ url = 'https://api.openweathermap.org/data/2.5/forecast'
 data = requests.get(url, params=query).json()  # could be errors here.
 pprint(data)
 
-list_of_forcasts = data['list']  # first key in dict
+list_of_forecasts = data['list']  # first key in dict
 
-for forecast in list_of_forcasts:
+for forecast in list_of_forecasts:
     temp = forecast['main']['temp']
     time_stamp = forecast['dt']  # time_stamp variable name as I had mis typed the Timestamp internal kep word
     forecast_date = datetime.fromtimestamp(time_stamp)
