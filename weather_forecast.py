@@ -8,15 +8,14 @@ import os                  # needed to get to global key where we set the weathe
 from datetime import datetime  # needed to deal with time fomort conversions. 
 
 key = os.environ.get('WEATHER_KEY')  # key will be local varial key forword and get the key value to insert into our url
-url = 'https://api.openweathermap.org/data/2.5/forecast'#?lat=35&lon=139&appid=5ec0b48124dcfb49d9ffd7b75d503ee7
-#url = 'https://api.openweathermap.org/data/2.5/weather' #?q=minneapolis,mn,us&units=imperial&appid={key}'
+url = 'https://api.openweathermap.org/data/2.5/forecast'  # updated key 
 
 ## TODO checks: spaces, spelling, more testing,comments, error handling complete
 def main():    
     location = get_location()
-    weather_data = get_current_weather(location)
+    weather_data = get_forecast_weather(location)
     current_forecast = get__five_day_forecast(weather_data)
-    pprint(f'Your current temp: {current_forecast}, local time date is {current_forecast}, skies are {current_forecast}, with a wind speed {current_forecast} in {location}.')
+    print(f'Your current temp: {current_forecast[0]}, local date and time is: {current_forecast[1]} , skies are {current_forecast[2]}, with a wind speed {current_forecast[3]} in {location}.')
     
            
 def get_location():
@@ -31,7 +30,7 @@ def get_location():
     return location
 
 
-def get_current_weather(location):
+def get_forecast_weather(location):
     try:
         query = {'q': location, 'units': 'imperial', 'appid': key} # picking keys from dictionary 
         response = requests.get(url, params=query)  # request does the query from our params in query variable
@@ -52,9 +51,9 @@ def get__five_day_forecast(data):
         temp = forecast['main']['temp']  # getting data for temp.
         time = forecast['dt']
         time_date = datetime.fromtimestamp(time)  #  non internalional format.  
-       #description = weather_data['weather'][0]['description']
-       #wind = weather_data['wind']['speed']
-       return  temp, time_date#, description, wind #description.
+        description = forecast['weather'][0]['description']
+        wind = forecast['wind']['speed']
+       return  temp, time_date, description, wind 
     #time_date, description, wind.
     except Exception as e:
          print(e)
