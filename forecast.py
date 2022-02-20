@@ -15,10 +15,8 @@ query = {'q': 'minneapolis,us', 'units': 'imperial', 'appid': key}
 
 url = 'https://api.openweathermap.org/data/2.5/forecast'
 
-
-
 data = requests.get(url, params=query).json()  # could be errors here.
-pprint(data)
+#pprint(data)  # prints the whole forecast from the api
 
 list_of_forecasts = data['list']  # first key in dict
 
