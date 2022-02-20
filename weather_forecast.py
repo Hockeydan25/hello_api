@@ -15,7 +15,7 @@ def main():
     location = get_location()
     weather_data = get_forecast_weather(location,key)
     weather_forecast = get_five_day_forecast(weather_data)    
-    print(f'Your current temp: {weather_forecast}f,local date and time is: {weather_forecast[1]}, skies are {weather_forecast[2]}, with a wind speed {weather_forecast[3]} in {location}.') 
+    # print(f'Your current temp: {weather_forecast}f,local date and time is: {weather_forecast[1]}, skies are {weather_forecast[2]}, with a wind speed {weather_forecast[3]} in {location}.') 
            
 
 def get_location():
@@ -45,19 +45,20 @@ def get_forecast_weather(location,key):
     ## TODO windspeed three hour intervals - may need a new url to choose or maybe 5 day has that option.
     ## TODO add a 5 day time frame. Unix Time or UTC. 
 def get_five_day_forecast(data):
-    # try:
-        forecasted_weather= data['list']
-        for forecast in forecasted_weather:
-            temp = forecast['main']['temp']   # getting data for temp
-            time = forecast['dt']
+    try:
+        forecasted_weather = data['list']
+        for forecasts in forecasted_weather:
+            temp = forecasts['main']['temp']   # getting data for temp
+            time = forecasts['dt']
             time_date = datetime.fromtimestamp(time)  #  non internalional format  
-            description = forecast['weather'][0]['description']
-            wind = forecast['wind']['speed']            
-            return temp, time_date, description, wind
-    # except Exception as e:
-    #     print(e)
-    #     print('There was an error making the request.')  # general error message.  
-    #     return 'Unknown?'  # could this be more spefic   
+            description = forecasts['weather'][0]['description']
+            wind = forecasts['wind']['speed']            
+            #return temp, time_date, description, wind
+            print(f'Temperture data {temp}F\nlocal date and time {time_date}\nskies are {description}\nhaving a wind speed of {wind}.') 
+    except Exception as e:
+        print(e)
+        print('There was an error making the request.')  # general error message.  
+        return 'Unknown?'  # could this be more spefic   
 
     ## TODO add logging     
 
