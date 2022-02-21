@@ -1,7 +1,7 @@
 """
 Dan Smestad Capstone 2905 class Python API connections
 """
-
+import logging
 import requests
 
 # data = requests.get('https://catfact.ninja/fact').json()  # url fetching
@@ -25,3 +25,8 @@ try:
 except Exception as e:
     print(e)
     print('There was an error making the request.')  
+
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.debug('This message should appear on the console')
+logging.info('So should this')
+logging.warning('And this, too')    
