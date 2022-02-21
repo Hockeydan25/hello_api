@@ -26,6 +26,7 @@ except Exception as e:
     print(e)
     print('There was an error making the request.')  
 
+## TODO logging messages basic setup. need to learn more here about output to a file etc...
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 logging.debug('This message should appear on the console')
 logging.info('So should this')
