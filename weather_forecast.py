@@ -30,7 +30,7 @@ def get_location():
     return location
 
 
-def get_forecast_weather_location(location,key):
+def get_forecast_weather_location(location, key):
     try:
         query = {'q': location, 'units': 'imperial', 'appid': key} # picking keys from dictionary 
         response = requests.get(url, params=query)  # request does the query from our params in query variable
