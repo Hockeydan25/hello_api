@@ -16,7 +16,6 @@ def get_currency_choice():
     TODO add validation, error handling """
     while True:
         try:
-
             currency = input('Enter target currency code: EUR, GBP or USD: ')  #  get on of three choices from user
             if currency != 'EUR' or 'USD' or 'GBP':
                 print('please use of these symbols EUR, GBP or USD: ')
@@ -26,8 +25,18 @@ def get_currency_choice():
 
 
 def get_cash_amount():
+
     """ Get number of dollars.  TODO add validation, error handling """
-    return float(input('Enter amount of dollars to convert: '))   
+    while True:
+        try:
+            cash = float(input('Enter amount of dollars to convert: '))
+            if cash <= 0:
+                raise ValueError('cash amount must be 1 or more.')
+            else:
+                return cash    
+        except:
+            print('Enter a number between 0 and 24.')
+        
 
 
 def convert(amount, exchange_rate):
