@@ -6,12 +6,12 @@ import requests
 
 
 def main():
-    currency = get_currency_to_choice()
+    currency = get_currency_choice()
     cash = get_cash_amount()
     converted = convert_currency_to_target(cash, currency)
     display_result(cash, currency, converted) # print
 
-def get_currency_to_choice():
+def get_currency_choice():
     """ Get target currency, and return as uppercase symbol. 
     TODO add validation, error handling """
     while True:
