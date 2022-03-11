@@ -3,7 +3,7 @@ Dan Smestad Capstone 2905 class Python API connections
 """
 
 import requests
-from pprint import pprint  # getting a printout that is more structored for reading
+
 
 def main():
     currency = get_currency_to_choice()
@@ -14,8 +14,15 @@ def main():
 def get_currency_to_choice():
     """ Get target currency, and return as uppercase symbol. 
     TODO add validation, error handling """
-    currency = input('Enter target currency code e.g. EUR, GBP or USD: ')  #  get on of three choices from user
-    return currency.upper()  # converting to upper case
+    while True:
+        try:
+
+            currency = input('Enter target currency code: EUR, GBP or USD: ')  #  get on of three choices from user
+            if currency != 'EUR' or 'USD' or 'GBP':
+                print('please use of these symbols EUR, GBP or USD: ')
+            return currency.upper()  # converting to upper case
+        except:
+            print('please use of these symbols EUR, GBP or USD: ')
 
 
 def get_cash_amount():
@@ -56,7 +63,7 @@ def extract_rate(rates,currency):
   
 def display_result(cash, currency, converted):
     """ Format and display the result """
-    print(f'${cash:.2f} {currency} monies is eaqual to {converted:.2f} Bitcoin')  # printing
+    print(f'${cash:.2f} {currency} monies is eaqual to {converted:.2f} of Bitcoin monies.')  # printing
 
 
 if __name__ == '__main__':
@@ -71,14 +78,7 @@ if __name__ == '__main__':
     #   "rate_float": 42558.105
     # }
     
-   
 
-
-
-
-# # curl make a pretty print as nice a pprint.
-#     dollars_exchange_rate = data['bpi']['USD']['rate_float']  # getting dictionary vaules we want 
-#     pprint(dollars_exchange_rate)  # printing . good variable name here.
 
 
 
