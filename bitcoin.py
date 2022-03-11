@@ -61,9 +61,9 @@ def get_exchange_rate(currency):
 def request_rates(currency):
     """ Perform API request, return response, error handling added"""
     try:
-        query = {'base': 'USD', 'symbols': currency}
+        query = {'base': 'USD', 'symbols': currency}  # seup parmerters to get
         response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json', query)  # URl for rates retreival. 
-        response.raise_for_status()
+        response.raise_for_status()  # error code from json chcinking for error codes here
         data = response.json()
         return  data  #requests.get(data, params=params).json()  
     except Exception as e:
@@ -75,14 +75,14 @@ def extract_rate(rates, currency):
     """ Process the JSON response from the API, extract rate data. TODO add error handling  """
     try:
         response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-        response.raise_for_status()  # access JSOn content
+        response.raise_for_status()  # access JSOn content error codes here 
         rates = response.json()
         # print("Entire JSON response")
         # print(jsonResponse) 
+        return rates['bpi']['USD']['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
     except Exception as err:
         print(f'Other error occurred: {err}')   
-
-    return rates['bpi']['USD']['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
+    
       
   
 def display_result(cash, currency, converted):
