@@ -2,7 +2,6 @@
 Dan Smestad Capstone 2905 class Python API connections
 """
 
-from calendar import c
 import requests
 
 
