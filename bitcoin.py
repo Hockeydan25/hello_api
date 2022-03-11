@@ -2,6 +2,7 @@
 Dan Smestad Capstone 2905 class Python API connections
 """
 
+from calendar import c
 import requests
 
 
@@ -13,20 +14,21 @@ def main():
 
 def get_currency_choice():
     """ Get target currency, and return as uppercase symbol. 
-    TODO add validation, error handling """
+    add validation, error handling """
     while True:
         try:
             currency = input('Enter target currency code: EUR, GBP or USD: ')  #  get on of three choices from user
-            if currency != 'EUR' or 'USD' or 'GBP':
-                print('please use of these symbols EUR, GBP or USD: ')
-            return currency.upper()  # converting to upper case
+            if len(currency) == 0 :
+                raise ValueError('please use of these symbols EUR, GBP or USD: ')
+            else:
+                return currency.upper()  # converting to upper case
         except:
             print('please use of these symbols EUR, GBP or USD: ')
 
 
 def get_cash_amount():
 
-    """ Get number of dollars.  TODO add validation, error handling """
+    """ Get number of dollars, validation, error handling """
     while True:
         try:
             cash = float(input('Enter amount of dollars to convert: '))
@@ -35,9 +37,8 @@ def get_cash_amount():
             else:
                 return cash    
         except:
-            print('Enter a number between 0 and 24.')
+            print('Enter a positive number.')
         
-
 
 def convert(amount, exchange_rate):
     """ Convert using the given exchange rate """
@@ -72,7 +73,7 @@ def extract_rate(rates,currency):
   
 def display_result(cash, currency, converted):
     """ Format and display the result """
-    print(f'${cash:.2f} {currency} monies is eaqual to {converted:.2f} of Bitcoin monies.')  # printing
+    print(f'${cash:.2f} {currency} monies is equal to {converted:.2f} of Bitcoin monies.')  # printing
 
 
 if __name__ == '__main__':
