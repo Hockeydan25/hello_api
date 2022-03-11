@@ -13,7 +13,7 @@ def main():
 
 def get_currency_choice():
     """ Get target currency, and return as uppercase symbol. 
-    add validation, error handling """
+    add validation, error handling added. """
     while True:
         try:
             currency = input('Enter target currency code: EUR, GBP or USD: ')  #  get on of three choices from user
@@ -27,7 +27,7 @@ def get_currency_choice():
 
 def get_cash_amount():
 
-    """ Get number of dollars, validation, error handling """
+    """ Get number of dollars, validation, error handling added. """
     while True:
         try:
             cash = float(input('Enter amount of dollars to convert: '))
@@ -59,33 +59,40 @@ def get_exchange_rate(currency):
 
     
 def request_rates(currency):
-    """ Perform API request, return response. TODO add error handling """
-    params = {'base': 'USD', 'symbols': currency}
-    coindesk_url = 'https://api.coindesk.com/v1/bpi/currentprice.json'  # URl for rates retreival amaving the changes in only a few minutes. 
-    return requests.get(coindesk_url, params=params).json()    
+    """ Perform API request, return response, error handling added"""
+    try:
+        query = {'base': 'USD', 'symbols': currency}
+        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json', query)  # URl for rates retreival. 
+        response.raise_for_status()
+        data = response.json()
+        return  data  #requests.get(data, params=params).json()  
+    except Exception as e:
+         print(e)
+         print('There was an error making the request.')  # tested with network down, working [errno 11001] failed to establish new.     
 
+def extract_rate(rates, currency):
 
-def extract_rate(rates,currency):
     """ Process the JSON response from the API, extract rate data. TODO add error handling  """
+    try:
+        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        response.raise_for_status()  # access JSOn content
+        rates = response.json()
+        # print("Entire JSON response")
+        # print(jsonResponse) 
+    except Exception as err:
+        print(f'Other error occurred: {err}')   
+
     return rates['bpi']['USD']['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
       
   
 def display_result(cash, currency, converted):
     """ Format and display the result """
-    print(f'${cash:.2f} {currency} monies is equal to {converted:.2f} of Bitcoin monies.')  # printing
+    print(f'${cash:.2f} {currency} monies is equal to {converted:.2f} of Bitcoin monies.')  # printing summary of query to api with users data.
 
 
 if __name__ == '__main__':
     main()
 
-    # {
-    # "USD": {
-    #   "code": "USD",
-    #   "symbol": "&#36;",
-    #   "rate": "42,558.1050",
-    #   "description": "United States Dollar",
-    #   "rate_float": 42558.105
-    # }
     
 
 
