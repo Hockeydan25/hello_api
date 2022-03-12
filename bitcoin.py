@@ -3,26 +3,30 @@ Dan Smestad Capstone 2905 class Python API connections
 """
 
 import requests
-
+from tkinter import *
 
 def main():
     currency = get_currency_choice()
     cash = get_cash_amount()
     converted = convert_currency_to_target(cash, currency)
-    display_result(cash, currency, converted) # print
+    display_result(cash, currency, converted) # output data we want to show the user.
 
 def get_currency_choice():
     """ Get target currency, and return as uppercase symbol. 
-    add validation, error handling added. """
+    add validation, error handling added. using while loop to check user is inputting data"""
+    
     while True:
         try:
-            currency = input('Enter target currency code: EUR, GBP or USD: ')  #  get on of three choices from user
-            if len(currency) == 0 :
+            currency = input('Enter a target currency code: EUR, GBP or USD: ')
+            currency_list = ['EUR', 'GBP' , 'USD']
+            if currency.upper() not in currency_list:  # had to make this upper to work  
                 raise ValueError('please use of these symbols EUR, GBP or USD: ')
-            else:
+            elif len(currency) == 0 :
+                raise ValueError('please enter a symbols EUR, GBP or USD: ')
+            else:      
                 return currency.upper()  # converting to upper case
         except:
-            print('please use of these symbols EUR, GBP or USD: ')
+            print('Alert: please use of these symbols EUR, GBP or USD: ')
 
 
 def get_cash_amount():
@@ -72,7 +76,7 @@ def request_rates(currency):
 
 def extract_rate(rates, currency):
 
-    """ Process the JSON response from the API, extract rate data. TODO add error handling  """
+    """ Process the JSON response from the API, extract rate data. added error handling  """
     try:
         response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
         response.raise_for_status()  # access JSOn content error codes here 
@@ -83,7 +87,6 @@ def extract_rate(rates, currency):
     except Exception as err:
         print(f'Other error occurred: {err}')   
     
-      
   
 def display_result(cash, currency, converted):
     """ Format and display the result """

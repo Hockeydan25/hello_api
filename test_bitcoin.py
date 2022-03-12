@@ -7,9 +7,6 @@ import bitcoin
 class TestBitcoin(TestCase):
     """ mock the user input and for it to return a value to use for testing """
 
-
-
-
     @patch('builtins.input', side_effect=['EUR'])  # list of mock inputs here
     def test_get_currency_choice(self, mock_input):
         country = bitcoin.get_currency_choice()  # testing the input is checking correctly housrs entered.
@@ -40,7 +37,7 @@ class TestBitcoin(TestCase):
 
 
         
-          
+        
 
      # todo - test error conditions 
     # Currency symbol is not found,
