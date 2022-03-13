@@ -1,5 +1,9 @@
 """
-Dan Smestad Capstone 2905 class Python API connections
+Dan Smestad Capstone 2905 class Python API connections\
+    # Currency symbol is not found,
+    # Dollar value is not a number,
+    # Connection errors to exchange rate API,
+    # what else?  
 """
 
 import requests

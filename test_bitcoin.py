@@ -5,7 +5,8 @@ from unittest.mock import patch
 import bitcoin
 
 class TestBitcoin(TestCase):
-    """ mock the user input and for it to return a value to use for testing """
+    """ mock the user input and for it to return a value to use for testing 
+        # todo - test error conditions     """
 
     @patch('builtins.input', side_effect=['EUR'])  # list of mock inputs here
     def test_get_currency_choice(self, mock_input):
@@ -33,22 +34,10 @@ class TestBitcoin(TestCase):
         mock_requests_json.return_value = example_api_response
         converted = bitcoin.convert_currency_to_target(100, 'USD')  #converted is working the math too mock_rate * 100
         expected = 412345.67      # expected is the mock_rate * 100   
-        self.assertEqual(expected, converted)  
-
-
-        
-        
-
-     # todo - test error conditions 
-    # Currency symbol is not found,
-    # Dollar value is not a number,
-    # Connection errors to exchange rate API,
-    # what else?    
-
+        self.assertEqual(expected, converted)   
 
 
 if __name__ == '__main__':
     unittest.main()        
 
-# {"USD": {"code": "USD","symbol": "&#36;","rate": "42,558.1050","description": "United States Dollar","rate_float": 42558.105}   
-#"bpi": {"USD": {"code": "USD","symbol": "&#36;","rate": "42,209.5575","description": "United States Dollar","rate_float": 42209.5575}
+ 
