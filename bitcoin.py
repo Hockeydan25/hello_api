@@ -82,12 +82,7 @@ def extract_rate(rates, currency):
 
     """ Process the JSON response from the API, extract rate data. added error handling  """
     try:
-        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-        response.raise_for_status()  # access JSOn content error codes here 
-        rates = response.json()
-        # print("Entire JSON response")
-        # print(jsonResponse) 
-        return rates['bpi']['USD']['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
+        return rates['bpi'][currency]['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
     except Exception as err:
         print(f'Other error occurred: {err}')   
     
