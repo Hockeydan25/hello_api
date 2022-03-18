@@ -49,7 +49,10 @@ def get_cash_amount():
 
 def convert(amount, exchange_rate):
     """ Convert using the given exchange rate """
-    return amount * exchange_rate  
+    print(amount)
+    print(exchange_rate)
+    new_rate = (amount * exchange_rate)
+    return new_rate   
 
 
 def convert_currency_to_target(cash, target_currency):
@@ -81,11 +84,11 @@ def request_rates(currency):
 def extract_rate(rates, currency):
 
     """ Process the JSON response from the API, extract rate data. """
-    try:
-        
-        return rates['bpi'][currency]['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
-    except Exception as err:
-        print(f'Other error occurred: {err}')   
+    # try:
+
+    return rates['bpi'][currency]['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
+    # except Exception as err:
+    #     print(f'Other error occurred: {err}')   
     
   
 def display_result(cash, currency, converted):
