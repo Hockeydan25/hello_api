@@ -80,8 +80,9 @@ def request_rates(currency):
 
 def extract_rate(rates, currency):
 
-    """ Process the JSON response from the API, extract rate data. added error handling  """
+    """ Process the JSON response from the API, extract rate data. """
     try:
+        
         return rates['bpi'][currency]['rate_float']  # dict to quuery for current rate. we could add a print current data time stampt to this.
     except Exception as err:
         print(f'Other error occurred: {err}')   
